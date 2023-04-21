@@ -1,4 +1,4 @@
 -- 코드를 입력하세요
 SELECT WAREHOUSE_ID,WAREHOUSE_NAME,ADDRESS, IFNULL(FREEZER_YN, 'N') FROM food_warehouse
-WHERE address like "경기도%" 
+WHERE address like "경기도%"
 ORDER BY WAREHOUSE_ID
