@@ -1,0 +1,7 @@
+-- 코드를 입력하세요
+SELECT * FROM(
+    SELECT name, count(*) as COUNT FROM animal_ins
+    GROUP BY name
+    HAVING COUNT > 1
+    ORDER BY name)X
+WHERE name is not null
