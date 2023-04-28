@@ -1,5 +1,4 @@
 from collections import defaultdict
-from math import prod
 
 def solution(clothes):
     dict_ = defaultdict(int)
@@ -7,6 +6,8 @@ def solution(clothes):
         dict_[x] += 1
 
     vals = list(dict_.values())
-    count = prod([v+1 for v in vals]) - 1
+    count = 1
+    for i in vals:
+        count *= i+1
     
-    return count
+    return count-1
