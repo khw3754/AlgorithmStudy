@@ -11,7 +11,7 @@ def solution(s):
     # print(s)
     s = sorted(s, key=lambda x: (len(x), x[-1]))
     # print(s)
-    
+
     # 결과, result의 수의 개수 count하는 딕셔너리
     result = []
     count = defaultdict(int)
@@ -27,6 +27,6 @@ def solution(s):
                 break
             else:
                 tmp_count[i] -= 1
-    
-    
+
+
     return result
