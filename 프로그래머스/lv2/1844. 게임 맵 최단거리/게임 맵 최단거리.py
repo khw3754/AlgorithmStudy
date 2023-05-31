@@ -1,32 +1,24 @@
 from collections import deque
 
-def solution(maps):
-    w, h = len(maps[0]), len(maps)
-    visited = [[False for _ in range(w)] for _ in range(h)]
-    
+def bfs(maps):
     q = deque()
-    q.append([0, 0])
-    visited[0][0] = True
+    q.append((0,0))
     
-    dx = [1, -1, 0, 0]
-    dy = [0, 0, 1, -1]
-    
-    find_goal = False
+    dx = [0, 0, -1, 1]
+    dy = [-1, 1, 0, 0]
     
     while q:
         x, y = q.popleft()
-        if (x, y) == (h-1, w-1):
-            find_goal = True
-            break
-        
         for i in range(4):
-            n_x, n_y = x + dx[i], y + dy[i]
-            if 0 <= n_x < h and 0 <= n_y < w and maps[n_x][n_y] == 1 and not visited[n_x][n_y]:
-                maps[n_x][n_y] += maps[x][y]
-                q.append([n_x, n_y])
-                visited[n_x][n_y] = True
-                
-    if find_goal:
-        return maps[-1][-1]
-    else:
-        return -1
+            nx, ny = x + dx[i], y + dy[i]
+            
+            if 0 <= nx < len(maps) and 0 <= ny < len(maps[0]):
+                if maps[nx][ny] == 1:
+                    maps[nx][ny] += maps[x][y]
+                    q.append((nx, ny))
+    
+
+def solution(maps):
+    bfs(maps)
+    answer = maps[-1][-1] if maps[-1][-1] != 1 else -1
+    return answer
