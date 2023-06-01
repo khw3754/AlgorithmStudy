@@ -27,10 +27,3 @@ def solution(files):
     answer = [i[0] for i in files_sort]
     
     return answer
-
-
-
-#런타임 에러 아니면 성공
-
-
-
