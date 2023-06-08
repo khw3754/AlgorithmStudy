@@ -1,20 +1,29 @@
-from itertools import permutations as per
+from itertools import permutations as permut
 
-def cal(n):
-    if n == 1 or n == 0:
+def is_prime(n):
+    result = True
+    if n == 0 or n == 1:
         return False
-    for i in range(2, int(n**(1/2))+1):
+    
+    for i in range(2, int(n**(1/2)) + 1):
         if n % i == 0:
-            return False
-    return True
+            result = False
+            break
+            
+    return result
 
 def solution(numbers):
-    numbers_ = []
-    for i in range(1, len(numbers)+1):
-        numbers_.extend(list(per(numbers, i)))
-    numbers_ = list(map(lambda x: int(''.join(x)), numbers_))
-    numbers_ = list(filter(cal, numbers_))
+    answer = 0
     
-    numbers_ = list(set(numbers_))
-    print(numbers_)
-    return len(numbers_)
+    result = []
+    for i in range(1, len(numbers)+1):
+        for j in set(permut(numbers, i)):
+            result.append(int(''.join(j)))
+            
+    result = set(result)
+    for r in result:
+        print(r)
+        if is_prime(r):
+            answer += 1
+    
+    return answer
