@@ -5,9 +5,9 @@ def solution(k, tangerine):
             size[i] = 1
         else:
             size[i] += 1
-    
+
     keys = sorted(size.keys(), key = lambda x: -size[x])
-    
+
     count = 0
     for key in keys:
         if size[key] >= k:
@@ -17,6 +17,6 @@ def solution(k, tangerine):
         else:
             k -= size[key]
             count += 1
-        
-    
+
+
     return count
