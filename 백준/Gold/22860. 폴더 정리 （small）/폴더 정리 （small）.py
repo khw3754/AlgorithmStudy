@@ -30,10 +30,10 @@ class Folder:
         return [resultSet, resultCount]
 
 
-N, M = map(int, input().split())
+N, M = map(int, sys.stdin.readline().split())
 
 for _ in range(N + M):
-    parentName, childName, isFolder = input().split()
+    parentName, childName, isFolder = sys.stdin.readline().strip().split()
 
     if foldersTotal.get(parentName, -1) == -1:
         foldersTotal[parentName] = Folder()
@@ -43,10 +43,10 @@ for _ in range(N + M):
     else:
         foldersTotal[parentName].addFile(childName)
 
-Q = int(input())
+Q = int(sys.stdin.readline())
 
 for _ in range(Q):
-    query = input()
+    query = sys.stdin.readline().strip()
     targetFileName = query.split('/')
     fileSet, count = foldersTotal[targetFileName[-1]].countFiles()
     print(len(fileSet), count)
