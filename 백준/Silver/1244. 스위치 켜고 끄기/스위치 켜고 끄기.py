@@ -1,37 +1,34 @@
-import sys
+switch_count = int(input())
+switches = list(map(int, input().split()))
+stu_count = int(input())
 
-switchCount = int(sys.stdin.readline())
-switches = list(map(int, sys.stdin.readline().split()))
-stuCount = int(sys.stdin.readline())
+def maleFunc(num):
+    n = num
+    num -= 1
+    while num < switch_count:
+        switches[num] = 1 if switches[num] == 0 else 0
+        num += n
 
-def switch(n):
-    if switches[n - 1] == 1:
-        switches[n - 1] = 0
-    else:
-        switches[n - 1] = 1
+def femaleFunc(num):
+    num -= 1
+    switches[num] = 0 if switches[num] == 1 else 1
 
-def boy(switchNum):
-    targetNum = switchNum
-    while targetNum <= switchCount:
-        switch(targetNum)
-        targetNum += switchNum
+    left, right = num - 1, num + 1
+    while 0 <= left and right < switch_count and switches[left] == switches[right]:
+        switches[left] = 0 if switches[left] == 1 else 1
+        switches[right] = 0 if switches[right] == 1 else 1
+        left -= 1
+        right += 1
 
-def girl(switchNum):
-    width = 0
-    while switchNum - (width + 1) - 1 >= 0 and switchNum + (width + 1) - 1 < switchCount:
-        if switches[switchNum - (width + 1) - 1] == switches[switchNum + (width + 1) - 1]:
-            width += 1
-        else:
-            break
+func_dict = {1 : maleFunc, 2 : femaleFunc}
 
-    for i in range(switchNum - width, switchNum + width + 1):
-        switch(i)
+for _ in range(stu_count):
+    sex, num = map(int, input().split())
+    func_dict[sex](num)
 
-switchFunc = [0, boy, girl]
-for _ in range(stuCount):
-    gender, switchNum = map(int, sys.stdin.readline().split())
-    switchFunc[gender](switchNum)
 
-while switches:
-    print(*switches[:20])
-    switches = switches[20:]
+# 출력 20개
+index = 0
+while index < switch_count:
+    print(*switches[index:index+20])
+    index += 20
